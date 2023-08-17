@@ -1,0 +1,12 @@
+{
+  "name": "raise-the-bones",
+  "bin": "./index.js",
+  "version": "0.0.0",
+  "description": "Quick and clean react dev toolkit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Joe Davis",
+  "license": "MIT"
+}
