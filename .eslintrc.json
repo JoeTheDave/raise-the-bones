@@ -2,7 +2,9 @@
   "rules": {
     "react-hooks/exhaustive-deps": "off",
     "no-loop-func": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "@typescript-eslint/semi": "off",
+    "arrow-parens": "off"
   },
   "extends": ["airbnb", "airbnb-typescript"],
   "parserOptions": {
