@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "react-hooks/exhaustive-deps": "off",
+    "no-loop-func": "off",
+    "no-console": "off"
+  },
+  "extends": ["airbnb", "airbnb-typescript"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
+}
