@@ -1,7 +1,7 @@
 {
   "name": "raise-the-bones",
   "bin": "./dist/index.js",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Quick and clean react dev toolkit",
   "main": "./dist/index.js",
   "type": "module",
