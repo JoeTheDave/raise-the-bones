@@ -4,10 +4,16 @@
     "no-loop-func": "off",
     "no-console": "off",
     "@typescript-eslint/semi": "off",
-    "arrow-parens": "off"
+    "arrow-parens": "off",
+    "no-multiple-empty-lines": "off",
+    "no-multi-spaces": "off",
+    "no-trailing-spaces": "off",
+    "implicit-arrow-linebreak": "off",
+    "padded-blocks": "off"
   },
   "extends": ["airbnb", "airbnb-typescript"],
   "parserOptions": {
     "project": "./tsconfig.json"
-  }
+  },
+  "ignorePatterns": ["dist/*.js"]
 }

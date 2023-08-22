@@ -11,6 +11,8 @@
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "~/*": ["./src/*"]
     },

@@ -6,7 +6,7 @@
   "main": "./dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsc && chmod +x dist/index.js",
     "clean": "rm -rf ./dist"
   },
   "author": "Joe Davis",
@@ -14,6 +14,7 @@
   "dependencies": {
     "gradient-string": "^2.0.2",
     "inquirer": "^9.2.10",
+    "nanospinner": "^1.1.0",
     "typescript": "^5.1.6"
   },
   "devDependencies": {
