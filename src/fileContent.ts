@@ -50,7 +50,7 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.listen(port)
-console.log(\`Server started at http://localhost: \${port}\`)
+console.log(\`Server started at http://localhost:\${port}\`)
 `
 
 export const prettierrc = () => `{
@@ -104,4 +104,11 @@ export const tsConfig = () => `{
     "outDir": "dist"
   }
 }
+`
+
+export const readme = (projectName: string) => `# ${projectName}
+
+Created with raise-the-bones
+[Github](https://github.com/JoeTheDave/raise-the-bones)
+[npm](https://www.npmjs.com/package/raise-the-bones)
 `

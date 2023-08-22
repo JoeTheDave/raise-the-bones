@@ -29,7 +29,7 @@ const executeCommand = (command: string, args: string[], executionDirectory: str
 const installNodeDependencies = async (directory: string) => {
   const spinner = createSpinner('Installing dependencies...').start()
   await executeCommand('npm', ['init', '-y'], directory)
-  await executeCommand('npm', ['i', 'express', 'ts-node', 'typescript'], directory)
+  await executeCommand('npm', ['i', 'express', 'tsx', 'typescript'], directory)
   await executeCommand(
     'npm',
     [
@@ -65,7 +65,7 @@ const addConfigurationFiles = (directory: string, projectName: string) => {
 
   const packageJson = JSON.parse(fs.readFileSync(`${directory}/package.json`, { encoding: 'utf8', flag: 'r' }))
   packageJson.scripts = {
-    start: 'ts-node --esm src/server.ts',
+    start: 'tsx src/server.ts',
   }
   packageJson.type = 'module'
   fs.writeFileSync(`${directory}/package.json`, JSON.stringify(packageJson, null, 2))
