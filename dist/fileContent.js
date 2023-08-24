@@ -1,4 +1,4 @@
-export const indexHtml = projectName => `<!DOCTYPE html>
+export const indexHtml = (projectName) => `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,11 +30,9 @@ export const indexHtml = projectName => `<!DOCTYPE html>
     </div>
   </body>
 </html>
-`
-
+`;
 export const gitIgnore = () => `node_modules
-`
-
+`;
 export const serverTs = () => `import express, { Request, Response } from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -51,8 +49,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.listen(port)
 console.log(\`Server started at http://localhost:\${port}\`)
-`
-
+`;
 export const prettierrc = () => `{
   "singleQuote": true,
   "trailingComma": "all",
@@ -60,8 +57,7 @@ export const prettierrc = () => `{
   "semi": false,
   "printWidth": 120
 }
-`
-
+`;
 export const eslint = () => `{
   "rules": {
     "react-hooks/exhaustive-deps": "off",
@@ -82,8 +78,7 @@ export const eslint = () => `{
   },
   "ignorePatterns": ["dist/*.js"]
 }
-`
-
+`;
 export const tsConfig = () => `{
   "include": ["**/*.ts"],
   "compilerOptions": {
@@ -99,15 +94,15 @@ export const tsConfig = () => `{
     "baseUrl": ".",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
+    "jsx": "react",
     "paths": {
       "~/*": ["./src/*"]
     },
     "outDir": "dist"
   }
 }
-`
-
-export const readme = projectName => `# ${projectName}
+`;
+export const readme = (projectName) => `# ${projectName}
 
 Created with raise-the-bones
 [Github](https://github.com/JoeTheDave/raise-the-bones)
@@ -118,4 +113,4 @@ Created with raise-the-bones
 - fly deploy (deploy the app to fly.io)
 - fly view (open the app in the browser)
 
-`
+`;

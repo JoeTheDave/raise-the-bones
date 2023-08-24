@@ -22,8 +22,8 @@ const askProjectName = async () => {
 const executeCommand = (command: string, args: string[], executionDirectory: string) =>
   new Promise<void>(resolve => {
     const child = spawn(command, args, { cwd: executionDirectory })
-    child.stdout.on('data', d => console.log(d.toString()))
-    child.stderr.on('data', d => console.log(d.toString()))
+    // child.stdout.on('data', d => console.log(d.toString()))
+    // child.stderr.on('data', d => console.log(d.toString()))
     child.on('close', () => {
       resolve()
     })

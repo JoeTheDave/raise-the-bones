@@ -99,6 +99,7 @@ export const tsConfig = () => `{
     "baseUrl": ".",
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
+    "jsx": "react",
     "paths": {
       "~/*": ["./src/*"]
     },
