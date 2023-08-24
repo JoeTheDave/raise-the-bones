@@ -1,4 +1,4 @@
-export const indexHtml = (projectName) => `<!DOCTYPE html>
+export const indexHtml = projectName => `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -30,9 +30,11 @@ export const indexHtml = (projectName) => `<!DOCTYPE html>
     </div>
   </body>
 </html>
-`;
+`
+
 export const gitIgnore = () => `node_modules
-`;
+`
+
 export const serverTs = () => `import express, { Request, Response } from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -41,7 +43,7 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 const app = express()
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 3000
 
 app.get('/', (req: Request, res: Response) => {
   res.sendFile(path.join(dirname, './index.html'))
@@ -49,7 +51,8 @@ app.get('/', (req: Request, res: Response) => {
 
 app.listen(port)
 console.log(\`Server started at http://localhost:\${port}\`)
-`;
+`
+
 export const prettierrc = () => `{
   "singleQuote": true,
   "trailingComma": "all",
@@ -57,13 +60,15 @@ export const prettierrc = () => `{
   "semi": false,
   "printWidth": 120
 }
-`;
+`
+
 export const eslint = () => `{
   "rules": {
     "react-hooks/exhaustive-deps": "off",
     "no-loop-func": "off",
     "no-console": "off",
     "@typescript-eslint/semi": "off",
+    "@typescript-eslint/indent": "off",
     "arrow-parens": "off",
     "no-multiple-empty-lines": "off",
     "no-multi-spaces": "off",
@@ -77,7 +82,8 @@ export const eslint = () => `{
   },
   "ignorePatterns": ["dist/*.js"]
 }
-`;
+`
+
 export const tsConfig = () => `{
   "include": ["**/*.ts"],
   "compilerOptions": {
@@ -99,10 +105,17 @@ export const tsConfig = () => `{
     "outDir": "dist"
   }
 }
-`;
-export const readme = (projectName) => `# ${projectName}
+`
+
+export const readme = projectName => `# ${projectName}
 
 Created with raise-the-bones
 [Github](https://github.com/JoeTheDave/raise-the-bones)
 [npm](https://www.npmjs.com/package/raise-the-bones)
-`;
+
+### Deployment
+- fly launch (initialize a fly.io app and local config file)
+- fly deploy (deploy the app to fly.io)
+- fly view (open the app in the browser)
+
+`

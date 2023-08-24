@@ -7,7 +7,8 @@ import inquirer from 'inquirer'
 import { createSpinner } from 'nanospinner'
 import * as fileContent from './fileContent.js'
 
-console.log(gradient('#666', '#FFF', '#666')('RAISE THE BONES!'))
+let projectName = ''
+let projectDirectory = ''
 
 const askProjectName = async () => {
   const answers = await inquirer.prompt({
@@ -15,21 +16,23 @@ const askProjectName = async () => {
     type: 'input',
     message: 'Project Name?',
   })
-  return answers.projectName
+  projectName = answers.projectName
 }
 
 const executeCommand = (command: string, args: string[], executionDirectory: string) =>
   new Promise<void>(resolve => {
     const child = spawn(command, args, { cwd: executionDirectory })
+    child.stdout.on('data', d => console.log(d.toString()))
+    child.stderr.on('data', d => console.log(d.toString()))
     child.on('close', () => {
       resolve()
     })
   })
 
-const installNodeDependencies = async (directory: string) => {
+const installNodeDependencies = async () => {
   const spinner = createSpinner('Installing dependencies...').start()
-  await executeCommand('npm', ['init', '-y'], directory)
-  await executeCommand('npm', ['i', 'express', 'tsx', 'typescript'], directory)
+  await executeCommand('npm', ['init', '-y'], projectDirectory)
+  await executeCommand('npm', ['i', 'express', 'tsx', 'typescript'], projectDirectory)
   await executeCommand(
     'npm',
     [
@@ -42,33 +45,34 @@ const installNodeDependencies = async (directory: string) => {
       '@typescript-eslint/parser',
       'eslint-config-airbnb-typescript',
     ],
-    directory,
+    projectDirectory,
   )
-  await executeCommand('npx', ['--yes', 'install-peerdeps', '--dev', 'eslint-config-airbnb'], directory)
+  await executeCommand('npx', ['--yes', 'install-peerdeps', '--dev', 'eslint-config-airbnb'], projectDirectory)
   spinner.success()
 }
 
-const addConfigurationFiles = (directory: string, projectName: string) => {
+const addConfigurationFiles = () => {
   const spinner = createSpinner('Adding configuration files ...').start()
   exec('node -v', (err, nodeVersion) => {
     if (!err) {
-      fs.writeFileSync(`${directory}/.nvmrc`, nodeVersion.replace('v', ''))
+      fs.writeFileSync(`${projectDirectory}/.nvmrc`, nodeVersion.replace('v', ''))
     }
   })
-  fs.writeFileSync(`${directory}/.gitignore`, fileContent.gitIgnore())
-  fs.writeFileSync(`${directory}/.prettierrc`, fileContent.prettierrc())
-  fs.writeFileSync(`${directory}/.eslintrc.json`, fileContent.eslint())
-  fs.writeFileSync(`${directory}/tsconfig.json`, fileContent.tsConfig())
-  fs.mkdirSync(`${directory}/src`)
-  fs.writeFileSync(`${directory}/src/server.ts`, fileContent.serverTs())
-  fs.writeFileSync(`${directory}/src/index.html`, fileContent.indexHtml(projectName))
+  fs.writeFileSync(`${projectDirectory}/.gitignore`, fileContent.gitIgnore())
+  fs.writeFileSync(`${projectDirectory}/.prettierrc`, fileContent.prettierrc())
+  fs.writeFileSync(`${projectDirectory}/.eslintrc.json`, fileContent.eslint())
+  fs.writeFileSync(`${projectDirectory}/README.md`, fileContent.readme(projectName))
+  fs.writeFileSync(`${projectDirectory}/tsconfig.json`, fileContent.tsConfig())
+  fs.mkdirSync(`${projectDirectory}/src`)
+  fs.writeFileSync(`${projectDirectory}/src/server.ts`, fileContent.serverTs())
+  fs.writeFileSync(`${projectDirectory}/src/index.html`, fileContent.indexHtml(projectName))
 
-  const packageJson = JSON.parse(fs.readFileSync(`${directory}/package.json`, { encoding: 'utf8', flag: 'r' }))
+  const packageJson = JSON.parse(fs.readFileSync(`${projectDirectory}/package.json`, { encoding: 'utf8', flag: 'r' }))
   packageJson.scripts = {
     start: 'tsx src/server.ts',
   }
   packageJson.type = 'module'
-  fs.writeFileSync(`${directory}/package.json`, JSON.stringify(packageJson, null, 2))
+  fs.writeFileSync(`${projectDirectory}/package.json`, JSON.stringify(packageJson, null, 2))
 
   spinner.success()
 }
@@ -81,11 +85,12 @@ const initializeGit = async (directory: string) => {
   spinner.success()
 }
 
-const projectName = await askProjectName()
-const projectDirectory = `${process.cwd()}/${projectName}`
+console.log(gradient('#666', '#FFF', '#666')('RAISE THE BONES!'))
+await askProjectName()
+projectDirectory = `${process.cwd()}/${projectName}`
 if (projectName && !fs.existsSync(projectName)) {
   fs.mkdirSync(projectDirectory)
-  await installNodeDependencies(projectDirectory)
-  addConfigurationFiles(projectDirectory, projectName)
+  await installNodeDependencies()
+  addConfigurationFiles()
   await initializeGit(projectDirectory)
 }

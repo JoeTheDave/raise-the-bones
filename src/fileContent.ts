@@ -43,7 +43,7 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 const app = express()
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 3000
 
 app.get('/', (req: Request, res: Response) => {
   res.sendFile(path.join(dirname, './index.html'))
@@ -68,6 +68,7 @@ export const eslint = () => `{
     "no-loop-func": "off",
     "no-console": "off",
     "@typescript-eslint/semi": "off",
+    "@typescript-eslint/indent": "off",
     "arrow-parens": "off",
     "no-multiple-empty-lines": "off",
     "no-multi-spaces": "off",
@@ -111,4 +112,10 @@ export const readme = (projectName: string) => `# ${projectName}
 Created with raise-the-bones
 [Github](https://github.com/JoeTheDave/raise-the-bones)
 [npm](https://www.npmjs.com/package/raise-the-bones)
+
+### Deployment
+- fly launch (initialize a fly.io app and local config file)
+- fly deploy (deploy the app to fly.io)
+- fly view (open the app in the browser)
+
 `
