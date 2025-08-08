@@ -1,9 +1,9 @@
 services:
   postgres:
     image: postgres:15
-    container_name: raise-the-bones-db
+    container_name: {{PROJECT_NAME}}-db
     environment:
-      POSTGRES_DB: raise_the_bones
+      POSTGRES_DB: {{PROJECT_NAME_SNAKE}}
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: localdev123
     ports:

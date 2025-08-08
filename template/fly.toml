@@ -1,4 +1,4 @@
-app = "raise-the-bones"
+app = "{{PROJECT_NAME}}"
 primary_region = "dfw"
 
 [build]
