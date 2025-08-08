@@ -27,3 +27,12 @@ dist-ssr
 .claude/
 .env
 /generated/prisma
+
+# database files
+*.db
+*.db-journal
+
+# temporary files
+temp.css
+*.temp.*
+temp.*
