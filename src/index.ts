@@ -12,7 +12,7 @@ const program = new Command();
 program
   .name('raise-the-bones')
   .description('Bootstrap a full-stack React + Express + Prisma application')
-  .version('1.0.36')
+  .version('1.0.37')
   .argument('<project-name>', 'name of the project to create')
   .option('-d, --directory <dir>', 'directory to create the project in', '.')
   .action(async (projectName: string, options: { directory: string }) => {
