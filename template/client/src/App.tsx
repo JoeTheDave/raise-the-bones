@@ -68,7 +68,7 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="container mx-auto px-4 py-8">
         <header className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Raise the Bones</h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">{{PROJECT_NAME}}</h1>
         </header>
 
         <main className="max-w-4xl mx-auto">

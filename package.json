@@ -1,6 +1,6 @@
 {
   "name": "raise-the-bones",
-  "version": "1.0.0",
+  "version": "1.0.36",
   "description": "Bootstrap a full-stack React + Express + Prisma application",
   "type": "module",
   "bin": {
@@ -10,22 +10,12 @@
     "dist",
     "template"
   ],
-  "keywords": [
-    "cli",
-    "template",
-    "react",
-    "express",
-    "typescript",
-    "prisma",
-    "fullstack",
-    "bootstrap",
-    "scaffold"
-  ],
   "license": "MIT",
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build && chmod +x dist/index.js && ls -la dist/index.js",
+    "publish-cli": "npm run build && chmod +x dist/index.js && npm publish"
   },
   "dependencies": {
     "chalk": "^5.3.0",

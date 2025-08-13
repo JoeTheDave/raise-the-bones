@@ -1,20 +1,11 @@
-services:
-  postgres:
-    image: postgres:15
-    container_name: {{PROJECT_NAME}}-db
-    environment:
-      POSTGRES_DB: {{PROJECT_NAME_SNAKE}}
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: localdev123
-    ports:
-      - '5432:5432'
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres']
-      interval: 10s
-      timeout: 5s
-      retries: 5
+# This docker-compose.yml is primarily used for ensuring shared PostgreSQL container
+# The actual PostgreSQL container is managed globally across all raise-the-bones projects
 
-volumes:
-  postgres_data:
+services:
+  # Placeholder service - shared PostgreSQL container is managed via npm scripts
+  # to avoid conflicts between multiple projects
+  placeholder:
+    image: alpine:latest
+    command: echo "Using shared raise-the-bones-postgres container"
+    profiles:
+      - disabled

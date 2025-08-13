@@ -12,7 +12,12 @@ const FILES_TO_PROCESS = [
   'package.json',
   'docker-compose.yml',
   'fly.toml',
-  'README.md'
+  'README.md',
+  '.env',
+  '.env.example',
+  '.env.production.example',
+  'scripts/ensure-database.sh',
+  'client/src/App.tsx'
 ];
 
 export async function createProject(projectName: string, targetDir: string): Promise<void> {
@@ -25,19 +30,14 @@ export async function createProject(projectName: string, targetDir: string): Pro
   const templatePath = getTemplatePath();
   
   if (!fs.existsSync(templatePath)) {
-    throw new Error('Template directory not found');
+    throw new Error(`Template directory not found at: ${templatePath}`);
   }
 
   // Create target directory
   await fs.ensureDir(targetDir);
 
   // Copy all files from template
-  await fs.copy(templatePath, targetDir, {
-    filter: (src) => {
-      // Skip node_modules if it exists in template
-      return !src.includes('node_modules');
-    }
-  });
+  await fs.copy(templatePath, targetDir);
 
   // Prepare template variables
   const variables: TemplateVariables = {
@@ -52,6 +52,14 @@ export async function createProject(projectName: string, targetDir: string): Pro
     if (fs.existsSync(filePath)) {
       await processTemplateFile(filePath, variables);
     }
+  }
+
+  // Copy .env.example to .env for immediate development use
+  const envExamplePath = path.join(targetDir, '.env.example');
+  const envPath = path.join(targetDir, '.env');
+  
+  if (fs.existsSync(envExamplePath)) {
+    await fs.copyFile(envExamplePath, envPath);
   }
 }
 
