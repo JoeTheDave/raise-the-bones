@@ -61,6 +61,14 @@ export async function createProject(projectName: string, targetDir: string): Pro
   if (fs.existsSync(envExamplePath)) {
     await fs.copyFile(envExamplePath, envPath);
   }
+
+  // Rename gitignore.template to .gitignore (npm excludes .gitignore files from packages)
+  const gitignoreTemplatePath = path.join(targetDir, 'gitignore.template');
+  const gitignorePath = path.join(targetDir, '.gitignore');
+  
+  if (fs.existsSync(gitignoreTemplatePath)) {
+    await fs.rename(gitignoreTemplatePath, gitignorePath);
+  }
 }
 
 async function processTemplateFile(filePath: string, variables: TemplateVariables): Promise<void> {

@@ -1,6 +1,6 @@
 {
   "name": "raise-the-bones",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "description": "Bootstrap a full-stack React + Express + Prisma application",
   "type": "module",
   "bin": {
