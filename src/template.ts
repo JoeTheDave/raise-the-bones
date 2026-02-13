@@ -17,7 +17,8 @@ const FILES_TO_PROCESS = [
   '.env.example',
   '.env.production.example',
   'scripts/ensure-database.sh',
-  'client/src/App.tsx'
+  'client/src/App.tsx',
+  'client/index.html'
 ];
 
 export async function createProject(projectName: string, targetDir: string): Promise<void> {
@@ -80,9 +81,10 @@ async function processTemplateFile(filePath: string, variables: TemplateVariable
     content = content.replace(regex, value);
   });
 
-  // Special case: replace the existing "raise-the-bones" name with the new project name
-  content = content.replace(/raise-the-bones/g, variables.PROJECT_NAME);
-  content = content.replace(/raise_the_bones/g, variables.PROJECT_NAME_SNAKE);
+  // Special case: replace "raise-the-bones" with the new project name, but preserve the
+  // shared PostgreSQL container/volume names so all bootstrapped projects share one container
+  content = content.replace(/raise-the-bones(?!-postgres)/g, variables.PROJECT_NAME);
+  content = content.replace(/raise_the_bones(?!_postgres)/g, variables.PROJECT_NAME_SNAKE);
 
   await fs.writeFile(filePath, content);
 }

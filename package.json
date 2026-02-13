@@ -1,17 +1,20 @@
 {
   "name": "raise-the-bones",
-  "version": "1.0.38",
+  "version": "1.0.39",
   "description": "Bootstrap a full-stack React + Express + Prisma application",
   "type": "module",
   "bin": {
-    "raise-the-bones": "./dist/index.js"
+    "raise-the-bones": "dist/index.js"
   },
   "files": [
     "dist",
     "template"
   ],
   "license": "MIT",
-  "repository": "https://github.com/JoeTheDave/raise-the-bones",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoeTheDave/raise-the-bones.git"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",

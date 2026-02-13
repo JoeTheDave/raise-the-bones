@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "npm run db:ensure && npm run db:migrate && concurrently \"npm run dev:server\" \"npm run dev:client\"",
-    "dev:setup": "npm run db:ensure && npm run db:migrate",
+    "dev": "npm run db:ensure && npm run db:migrate:deploy && concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:setup": "npm run db:ensure && npm run db:migrate:deploy",
     "dev:client": "vite --config client/vite.config.ts",
     "dev:server": "tsx watch server/src/index.ts",
     "build": "npm run build:client && npm run build:server",

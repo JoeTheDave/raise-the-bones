@@ -33,6 +33,8 @@ This project uses a **shared PostgreSQL container** approach to avoid port confl
 
 ### Database commands
 
+`npm run dev` applies pending migrations with `migrate deploy` (no drift check), so the app starts without prompts. Use `npm run db:migrate` when you change the schema and want to create a new migration.
+
 ```bash
 # Start shared container and create project database (automatic)
 npm run db:ensure
@@ -40,7 +42,10 @@ npm run db:ensure
 # Generate Prisma client
 npm run db:generate
 
-# Create and run migrations (includes seed data)
+# Apply pending migrations (used by npm run dev)
+npm run db:migrate:deploy
+
+# Create and apply a new migration (run after schema changes)
 npm run db:migrate
 
 # Open database browser
