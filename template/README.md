@@ -31,6 +31,10 @@ This project uses a **shared PostgreSQL container** approach to avoid port confl
 - Each project gets its own database (`{{PROJECT_NAME_SNAKE}}_dev`) within the shared container
 - Container starts automatically when you run `npm run dev`
 
+### Migration timestamps
+
+Template migrations use early timestamps (`20000101...`, `20000102...`) so that any new migration you create with `npm run db:migrate` (which uses the current date) will always run *after* the template migrations. This avoids "relation does not exist" errors when deploying to a fresh production database.
+
 ### Database commands
 
 `npm run dev` applies pending migrations with `migrate deploy` (no drift check), so the app starts without prompts. Use `npm run db:migrate` when you change the schema and want to create a new migration.
@@ -149,7 +153,7 @@ fly secrets set DATABASE_URL="your-external-db-url"
 ### Advanced Commands
 
 ```bash
-# Force re-run deployment setup
+# Force re-run deployment setup (e.g. to change database or recreate app)
 npm run deploy:force-setup
 
 # Manual Fly commands (if needed)

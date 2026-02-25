@@ -29,7 +29,7 @@
     "postgres:shared-stop": "docker stop raise-the-bones-postgres",
     "postgres:shared-logs": "docker logs raise-the-bones-postgres -f",
     "deploy": "node scripts/setup-deployment.js && npm run build && fly deploy",
-    "deploy:force-setup": "rm -f .flyio-setup-complete && npm run deploy"
+    "deploy:force-setup": "FORCE_FLY_SETUP=1 npm run deploy"
   },
   "dependencies": {
     "@prisma/client": "^6.13.0",
